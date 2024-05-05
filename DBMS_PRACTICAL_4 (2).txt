@@ -1,0 +1,48 @@
+CREATE DATABASE INHERITANCE;
+USE INHERITANCE;
+-- Creating the parent table
+CREATE TABLE ParentTable (
+    parent_id INT PRIMARY KEY,
+    parent_name VARCHAR(50)
+);
+
+-- Creating the child table with a foreign key constraint
+CREATE TABLE ChildTable (
+    child_id INT PRIMARY KEY,
+    child_name VARCHAR(50),
+    parent_id INT,
+    FOREIGN KEY (parent_id) REFERENCES ParentTable(parent_id)
+);
+
+-- Inserting data into ParentTable
+INSERT INTO ParentTable (parent_id, parent_name) VALUES
+(1, 'Parent A'),
+(2, 'Parent B'),
+(3, 'Parent C');
+
+-- Inserting data into ChildTable
+INSERT INTO ChildTable (child_id, child_name, parent_id) VALUES
+(101, 'Child 1', 1),
+(102, 'Child 2', 1),
+(103, 'Child 3', 2),
+(104, 'Child 4', 3);
+
+-- Selecting data from both tables to see the relationship
+SELECT * FROM ParentTable;
+SELECT * FROM ChildTable;
+
+-- Altering table to add a column in ParentTable
+ALTER TABLE ParentTable
+ADD column_name VARCHAR(50);
+
+
+
+-- Altering table to modify a column in ParentTable
+ALTER TABLE ParentTable
+MODIFY column_name VARCHAR(100);
+
+-- Dropping the foreign key constraint in ChildTable
+
+-- Dropping the tables
+DROP TABLE ChildTable;
+DROP TABLE ParentTable;
